@@ -114,24 +114,32 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
     };
   }, [engine, onTogglePause, onStartGame]);
 
-  // Main Render & Game Loop
+  // Main Render & Game Loop with 60Hz Fixed Timestep
   useEffect(() => {
     let animId: number;
     let lastTime = performance.now();
+    let accumulator = 0;
+    const FIXED_STEP = 1 / 60; // Exact 60 updates/sec on all 60Hz/90Hz/120Hz/144Hz displays
 
     const render = (currentTime: number) => {
-      const dt = Math.min((currentTime - lastTime) / 1000, 0.1);
+      const frameDelta = Math.min((currentTime - lastTime) / 1000, 0.1);
       lastTime = currentTime;
+
+      // 1. Update Game Engine at fixed 60Hz rate
+      if (!isPaused) {
+        accumulator += frameDelta;
+        let steps = 0;
+        while (accumulator >= FIXED_STEP && steps < 5) {
+          engine.update(FIXED_STEP);
+          accumulator -= FIXED_STEP;
+          steps++;
+        }
+      }
 
       const canvas = canvasRef.current;
       if (canvas) {
         const ctx = canvas.getContext('2d');
         if (ctx) {
-          // 1. Update Game Engine (if not paused)
-          if (!isPaused) {
-            engine.update(dt);
-          }
-
           // 2. Draw Background
           ctx.fillStyle = '#09090B'; // Dark background
           ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);

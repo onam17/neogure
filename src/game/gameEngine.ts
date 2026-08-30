@@ -19,10 +19,10 @@ export const CANVAS_WIDTH = 640;
 export const CANVAS_HEIGHT = 480;
 export const PLAYER_WIDTH = 30;
 export const PLAYER_HEIGHT = 32;
-const GRAVITY = 0.58;
-const JUMP_POWER = -6.8;
-const MOVE_SPEED = 4.8;
-const CLIMB_SPEED = 3.8;
+const GRAVITY = 0.40;
+const JUMP_POWER = -5.8;
+const MOVE_SPEED = 2.8;
+const CLIMB_SPEED = 2.2;
 
 export class GameEngine {
   public player: Player;

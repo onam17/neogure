@@ -1,0 +1,6 @@
+{
+  "name": "1980s 너구리 (Ponpoko)",
+  "description": "1980년대 오락실과 PC 시절을 풍미한 추억의 명작 너구리(Ponpoko) 아케이드 게임. 과일을 모으고 가시와 뱀을 피해 탈출하세요!",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
